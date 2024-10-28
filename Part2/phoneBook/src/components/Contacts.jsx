@@ -1,13 +1,13 @@
 import Contact from "./Contact";
 
-export default function Contacts({ data }) {
+export default function Contacts({ data, handleDeletPerson }) {
   return (
-    <div style={{ display: "flex", "flex-wrap": "wrap" }}>
+    <div style={{ display: "flex", flexWrap: "wrap" }}>
       {data?.map((elem) => {
         return (
           <div key={elem.id}>
             {" "}
-            <Contact elem={elem} />
+            <Contact elem={elem} handleDeletPerson={handleDeletPerson} />
           </div>
         );
       })}

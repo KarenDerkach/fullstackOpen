@@ -16,11 +16,23 @@ const App = () => {
   useEffect(() => {
     fetches
       .getAll()
-      .then((data) => setPersons(data))
+      .then((data) => {
+        setPersons(data);
+      })
       .catch((error) => {
         alert("FAIL", error);
       });
-  }, [persons]);
+  }, []);
+
+  //HANDLE STATES ON REAL TIME
+
+  const handleAddPerson = (newPerson) => {
+    setPersons([...persons, newPerson]);
+  };
+
+  const handleDeletPerson = (id) => {
+    setPersons(persons.filter((p) => p.id !== id));
+  };
 
   return (
     <div className="container">
@@ -32,17 +44,17 @@ const App = () => {
         </section>
         <section>
           <h3>ADD CONTACT</h3>
-          <PersonForm persons={persons} setPersons={setPersons} />
+          <PersonForm persons={persons} handleAddPerson={handleAddPerson} />
         </section>
       </div>
-      <h2>Numbers</h2>
+      <h2>List</h2>
 
       {nameFilter.length < 0 ? (
-        <Contacts data={persons} />
+        <Contacts data={persons} handleDeletPerson={handleDeletPerson} />
       ) : filterContact?.length === 0 ? (
         "No result"
       ) : (
-        <Contacts data={filterContact} />
+        <Contacts data={filterContact} handleDeletPerson={handleDeletPerson} />
       )}
     </div>
   );

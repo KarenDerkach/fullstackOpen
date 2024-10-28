@@ -1,8 +1,9 @@
-const baseUrl = "http://localhost:3001/persons";
+const baseUrl = "/api/persons";
 
 const getAll = () => {
   const request = fetch(baseUrl);
-  return request.then((response) => response.json());
+  const data = request.then((response) => response.json());
+  return data;
 };
 
 const create = (newObject) => {
@@ -13,7 +14,7 @@ const create = (newObject) => {
     },
     body: JSON.stringify(newObject),
   });
-  return request.then((response) => response.text());
+  return request.then((response) => response.json());
 };
 
 const deleteContact = (id) => {

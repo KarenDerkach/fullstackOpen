@@ -2,12 +2,13 @@ import { useState } from "react";
 import fetches from "../services/fetches";
 import Notifications from "./Notifications";
 
-export default function Contact({ elem }) {
+export default function Contact({ elem, handleDeletPerson }) {
   const [openWarning, setOpenWarning] = useState(false);
 
   const deleteContactById = (id) => {
     try {
       fetches.deleteContact(id).then(setOpenWarning(false));
+      handleDeletPerson(id);
     } catch (error) {
       console.log(error);
     }
@@ -20,6 +21,7 @@ export default function Contact({ elem }) {
         "background-color": "antiquewhite",
         padding: "20px",
         "border-radius": "10px",
+        position: "relative",
       }}
     >
       {openWarning && (
